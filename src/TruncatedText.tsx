@@ -104,12 +104,7 @@ export function useTruncatedText(
     ellipsis?: string;
   } = {},
 ): { lines: string[]; truncated: boolean } {
-  const {
-    maxLines = 1,
-    width: widthOverride,
-    pad = false,
-    ellipsis,
-  } = options;
+  const { maxLines = 1, width: widthOverride, pad = false, ellipsis } = options;
 
   let contextSize: ComputedSize | null = null;
   try {

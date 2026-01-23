@@ -86,12 +86,15 @@ describe("ConstraintRoot", () => {
 
 describe("useConstraintContext", () => {
   it("returns default values outside ConstraintRoot", () => {
-    const capture = createHookCapture<ReturnType<typeof useConstraintContext>>();
+    const capture =
+      createHookCapture<ReturnType<typeof useConstraintContext>>();
 
     // When called outside ConstraintRoot, should return defaults
     const TestComponent = () => {
       const ctx = useConstraintContext();
-      return <div data-terminal={`${ctx.terminal.columns}x${ctx.terminal.rows}`} />;
+      return (
+        <div data-terminal={`${ctx.terminal.columns}x${ctx.terminal.rows}`} />
+      );
     };
 
     // The hook should not throw and should return defaults

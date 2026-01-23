@@ -1,5 +1,10 @@
 import { describe, expect, it } from "bun:test";
-import { wrapText, constrainText, displayLength, truncateText } from "./text.ts";
+import {
+  wrapText,
+  constrainText,
+  displayLength,
+  truncateText,
+} from "./text.ts";
 
 describe("wrapText", () => {
   it("handles simple text", () => {
@@ -21,7 +26,10 @@ describe("wrapText", () => {
   it("strips trailing empty lines from trailing newlines", () => {
     // Bug fix: trailing newlines should not create blank lines
     expect(wrapText("Hello world\n", 20)).toEqual(["Hello world"]);
-    expect(wrapText("Line one\nLine two\n", 20)).toEqual(["Line one", "Line two"]);
+    expect(wrapText("Line one\nLine two\n", 20)).toEqual([
+      "Line one",
+      "Line two",
+    ]);
   });
 
   it("preserves intentional blank lines in the middle", () => {

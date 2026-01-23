@@ -20,10 +20,7 @@ export interface ScrollableListProps<T> {
   /** Render function for each item */
   renderItem: (item: T, index: number, isSelected: boolean) => ReactNode;
   /** Custom overflow indicator renderer */
-  renderOverflow?: (
-    direction: "top" | "bottom",
-    count: number,
-  ) => ReactNode;
+  renderOverflow?: (direction: "top" | "bottom", count: number) => ReactNode;
   /** Gap between items in lines */
   gap?: number;
   /** Height override (uses context height if not provided) */
@@ -189,8 +186,7 @@ function calculateVariableHeightScrollState<T>(
     heightBefore += heights[i] ?? 0;
   }
 
-  const targetScrollTop =
-    heightBefore - (availableHeight - selectedHeight) / 2;
+  const targetScrollTop = heightBefore - (availableHeight - selectedHeight) / 2;
 
   let scrollOffset = 0;
   let cumulativeHeight = 0;

@@ -63,7 +63,9 @@ describe("calculateScrollState", () => {
       const items = ["a", "b", "c", "d", "e", "f", "g", "h", "i", "j"];
       // 10 items, height 3, selecting middle
       const result = calculateScrollState(items, 5, 3, 1, 0, false);
-      expect(result.overflowTop + result.visible.length + result.overflowBottom).toBe(10);
+      expect(
+        result.overflowTop + result.visible.length + result.overflowBottom,
+      ).toBe(10);
     });
   });
 
@@ -102,7 +104,15 @@ describe("calculateScrollState", () => {
         { name: "d", height: 3 },
       ];
       const getItemHeight = (item: { height: number }) => item.height;
-      const result = calculateScrollState(items, 0, 10, 1, 0, true, getItemHeight);
+      const result = calculateScrollState(
+        items,
+        0,
+        10,
+        1,
+        0,
+        true,
+        getItemHeight,
+      );
       // All items should fit: 1 + 2 + 1 + 3 = 7 < 10
       expect(result.visible.length).toBe(4);
     });
@@ -117,7 +127,15 @@ describe("calculateScrollState", () => {
       ];
       const getItemHeight = (item: { height: number }) => item.height;
       // Total height 15, available 6, select last item
-      const result = calculateScrollState(items, 4, 6, 1, 0, true, getItemHeight);
+      const result = calculateScrollState(
+        items,
+        4,
+        6,
+        1,
+        0,
+        true,
+        getItemHeight,
+      );
       expect(result.visible.some((v) => v.index === 4)).toBe(true);
     });
 
@@ -126,9 +144,25 @@ describe("calculateScrollState", () => {
       const getItemHeight = () => 2;
       // Start at index 3, then select index 0
       // First calculate with index 3 selected to get a scroll state
-      const initialResult = calculateScrollState(items, 3, 5, 1, 0, true, getItemHeight);
+      const initialResult = calculateScrollState(
+        items,
+        3,
+        5,
+        1,
+        0,
+        true,
+        getItemHeight,
+      );
       // Now if we select something above the current view
-      const result = calculateScrollState(items, 0, 5, 1, 0, true, getItemHeight);
+      const result = calculateScrollState(
+        items,
+        0,
+        5,
+        1,
+        0,
+        true,
+        getItemHeight,
+      );
       expect(result.visible.some((v) => v.index === 0)).toBe(true);
     });
 
@@ -136,7 +170,15 @@ describe("calculateScrollState", () => {
       const items = ["a", "b", "c", "d", "e", "f", "g"];
       const getItemHeight = () => 2;
       // Select last item when starting from top
-      const result = calculateScrollState(items, 6, 5, 1, 0, true, getItemHeight);
+      const result = calculateScrollState(
+        items,
+        6,
+        5,
+        1,
+        0,
+        true,
+        getItemHeight,
+      );
       expect(result.visible.some((v) => v.index === 6)).toBe(true);
     });
   });

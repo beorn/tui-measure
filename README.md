@@ -23,7 +23,11 @@ bun add @beorn/tui-measure
 
 ```tsx
 import { render, useStdout, Text, Box } from "ink";
-import { ConstraintRoot, TruncatedText, useComputedSize } from "@beorn/tui-measure";
+import {
+  ConstraintRoot,
+  TruncatedText,
+  useComputedSize,
+} from "@beorn/tui-measure";
 
 function App() {
   const { stdout } = useStdout();
@@ -38,7 +42,9 @@ function MyComponent() {
   const { width, height } = useComputedSize();
   return (
     <Box flexDirection="column">
-      <Text>Available: {width}x{height}</Text>
+      <Text>
+        Available: {width}x{height}
+      </Text>
       <TruncatedText renderLine={(line, i) => <Text key={i}>{line}</Text>}>
         {veryLongText}
       </TruncatedText>
@@ -59,8 +65,8 @@ Root component that provides terminal dimensions to the constraint tree.
 
 ```tsx
 <ConstraintRoot
-  stdout={process.stdout}  // Required: stdout stream (from useStdout or process.stdout)
-  padding={1}              // Optional: padding from terminal edges
+  stdout={process.stdout} // Required: stdout stream (from useStdout or process.stdout)
+  padding={1} // Optional: padding from terminal edges
 >
   {children}
 </ConstraintRoot>
@@ -90,11 +96,11 @@ ANSI-aware text truncation that uses width from context.
 
 ```tsx
 <TruncatedText
-  maxLines={1}         // Maximum lines before truncation
-  ellipsis="…"         // Truncation indicator
-  width={40}           // Optional: explicit width override
-  pad={false}          // Pad lines to full width
-  renderLine={(line, i) => <Text key={i}>{line}</Text>}  // Optional: custom line renderer
+  maxLines={1} // Maximum lines before truncation
+  ellipsis="…" // Truncation indicator
+  width={40} // Optional: explicit width override
+  pad={false} // Pad lines to full width
+  renderLine={(line, i) => <Text key={i}>{line}</Text>} // Optional: custom line renderer
 >
   {text}
 </TruncatedText>
@@ -107,12 +113,22 @@ Distributes horizontal space among children using flex semantics.
 ```tsx
 <FlexRow
   gap={1}
-  renderRow={(children) => <Box flexDirection="row" gap={1}>{children}</Box>}
+  renderRow={(children) => (
+    <Box flexDirection="row" gap={1}>
+      {children}
+    </Box>
+  )}
   renderItem={(content, width) => <Box width={width}>{content}</Box>}
 >
-  <FlexItem width={10}><Text>Fixed</Text></FlexItem>
-  <FlexItem flex={2}><Text>Flex 2</Text></FlexItem>
-  <FlexItem flex={1}><Text>Flex 1</Text></FlexItem>
+  <FlexItem width={10}>
+    <Text>Fixed</Text>
+  </FlexItem>
+  <FlexItem flex={2}>
+    <Text>Flex 2</Text>
+  </FlexItem>
+  <FlexItem flex={1}>
+    <Text>Flex 1</Text>
+  </FlexItem>
 </FlexRow>
 ```
 
@@ -130,11 +146,11 @@ Virtualized scrolling list with overflow indicators.
     <Text inverse={isSelected}>{item.name}</Text>
   )}
   renderOverflow={(direction, count) => (
-    <Text dim>{direction === 'top' ? '▲' : '▼'} {count} more</Text>
+    <Text dim>
+      {direction === "top" ? "▲" : "▼"} {count} more
+    </Text>
   )}
-  renderContainer={(children) => (
-    <Box flexDirection="column">{children}</Box>
-  )}
+  renderContainer={(children) => <Box flexDirection="column">{children}</Box>}
 />
 ```
 
@@ -142,12 +158,12 @@ Virtualized scrolling list with overflow indicators.
 
 ```tsx
 import {
-  displayLength,   // Get display width excluding ANSI codes
-  stripAnsi,       // Remove all ANSI escape codes
-  wrapText,        // Word-wrap with ANSI support
-  truncateText,    // Truncate with ellipsis
-  padText,         // Pad to width
-  constrainText,   // Wrap + truncate + pad
+  displayLength, // Get display width excluding ANSI codes
+  stripAnsi, // Remove all ANSI escape codes
+  wrapText, // Word-wrap with ANSI support
+  truncateText, // Truncate with ellipsis
+  padText, // Pad to width
+  constrainText, // Wrap + truncate + pad
 } from "@beorn/tui-measure";
 
 // Get display width (handles ANSI, emoji, CJK)
@@ -186,7 +202,7 @@ Calculate scroll state without rendering.
 const { visible, overflowTop, overflowBottom, scrollOffset } = useScrollState(
   items,
   selectedIndex,
-  { itemHeight: 1, height: 10 }
+  { itemHeight: 1, height: 10 },
 );
 ```
 
@@ -197,11 +213,15 @@ const { visible, overflowTop, overflowBottom, scrollOffset } = useScrollState(
 Distribute space using integer math.
 
 ```tsx
-const widths = distributeSpace(80, [
-  { width: 10 },      // Fixed 10
-  { flex: 2 },        // 2/3 of remaining
-  { flex: 1 },        // 1/3 of remaining
-], 1);
+const widths = distributeSpace(
+  80,
+  [
+    { width: 10 }, // Fixed 10
+    { flex: 2 }, // 2/3 of remaining
+    { flex: 1 }, // 1/3 of remaining
+  ],
+  1,
+);
 // [10, 45, 23] (with 1-char gaps = 80 total)
 ```
 

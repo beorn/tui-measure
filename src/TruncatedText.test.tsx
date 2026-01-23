@@ -28,23 +28,17 @@ describe("TruncatedText", () => {
   });
 
   it("accepts ellipsis prop", () => {
-    const element = (
-      <TruncatedText ellipsis="...">Long text</TruncatedText>
-    );
+    const element = <TruncatedText ellipsis="...">Long text</TruncatedText>;
     expect(element.props.ellipsis).toBe("...");
   });
 
   it("accepts width override prop", () => {
-    const element = (
-      <TruncatedText width={40}>Fixed width text</TruncatedText>
-    );
+    const element = <TruncatedText width={40}>Fixed width text</TruncatedText>;
     expect(element.props.width).toBe(40);
   });
 
   it("accepts pad prop", () => {
-    const element = (
-      <TruncatedText pad={true}>Padded text</TruncatedText>
-    );
+    const element = <TruncatedText pad={true}>Padded text</TruncatedText>;
     expect(element.props.pad).toBe(true);
   });
 
