@@ -174,7 +174,12 @@ export function constrainText(
     lines = lines.map((line) => padText(line, width));
   }
 
-  debug("constrain: %d chars → %d/%d lines (truncated=%s)", text.length, lines.length, allLines.length, truncated);
+  debug("constrain", {
+    chars: text.length,
+    lines: lines.length,
+    allLines: allLines.length,
+    truncated,
+  });
 
   return { lines, truncated };
 }
