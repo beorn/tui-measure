@@ -213,7 +213,7 @@ export function distributeSpace(
     // Distribute remainder to first flex items (1 char each)
     for (let i = 0; remaining > 0 && i < configs.length; i++) {
       if (configs[i]?.width === undefined) {
-        widths[i]++;
+        widths[i]!++;
         remaining--;
       }
     }

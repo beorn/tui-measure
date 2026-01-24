@@ -60,7 +60,7 @@ describe("distributeSpace", () => {
     const configs: FlexItemConfig[] = [{ flex: 1 }, { flex: 1 }, { flex: 1 }];
     // Total 100, 2 gaps of 1 each = 98 available
     const widths = distributeSpace(100, configs, 1);
-    expect(widths[0] + widths[1] + widths[2]).toBe(98);
+    expect(widths[0]! + widths[1]! + widths[2]!).toBe(98);
   });
 
   it("applies minWidth constraint", () => {
