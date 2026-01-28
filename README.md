@@ -14,9 +14,9 @@ Works with Ink, inkx, or any React-based TUI framework.
 ## Installation
 
 ```bash
-npm install @beorn/tui-measure
-# or
 bun add @beorn/tui-measure
+# or
+npm install @beorn/tui-measure
 ```
 
 ## Quick Start
